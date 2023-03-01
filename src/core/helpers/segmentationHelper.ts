@@ -18,6 +18,8 @@ export type SegmentationConfig = {
   backend: SegmentationBackend
   inputResolution: InputResolution
   pipeline: PipelineName
+  targetFps: number
+  deferInputResizing: boolean
 }
 
 export function getTFLiteModelFileName(

@@ -1,10 +1,13 @@
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import Switch from '@material-ui/core/Switch'
+import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { ChangeEvent } from 'react'
 import {
@@ -85,6 +88,22 @@ function SegmentationConfigCard(props: SegmentationConfigCardProps) {
     props.onChange({
       ...props.config,
       pipeline: event.target.value as PipelineName,
+    })
+  }
+
+  function handleTargetFpsChange(event: ChangeEvent<{ value: string }>) {
+    props.onChange({
+      ...props.config,
+      targetFps: parseInt(event.target.value),
+    })
+  }
+
+  function handleDeferInputResizingChange(
+    event: ChangeEvent<{ checked: boolean }>
+  ) {
+    props.onChange({
+      ...props.config,
+      deferInputResizing: event.target.checked,
     })
   }
 
@@ -182,6 +201,29 @@ function SegmentationConfigCard(props: SegmentationConfigCardProps) {
               <MenuItem value="canvas2dCpu">Canvas 2D + CPU</MenuItem>
             </Select>
           </FormControl>
+          {props.config.pipeline === 'webgl2' && (
+            <>
+              <TextField
+                className={classes.formControl}
+                label="Target fps"
+                type="number"
+                variant="outlined"
+                value={props.config.targetFps}
+                onChange={handleTargetFpsChange}
+              />
+              <FormControlLabel
+                className={classes.formControl}
+                label="Defer input resizing"
+                control={
+                  <Switch
+                    checked={props.config.deferInputResizing}
+                    onChange={handleDeferInputResizingChange}
+                    color="primary"
+                  />
+                }
+              />
+            </>
+          )}
         </div>
       </CardContent>
     </Card>

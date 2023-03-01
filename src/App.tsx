@@ -25,25 +25,23 @@ function App() {
     type: 'image',
     url: backgroundImageUrls[0],
   })
-  const [
-    segmentationConfig,
-    setSegmentationConfig,
-  ] = useState<SegmentationConfig>({
-    model: 'meet',
-    backend: 'wasm',
-    inputResolution: '160x96',
-    pipeline: 'webgl2',
-  })
-  const [
-    postProcessingConfig,
-    setPostProcessingConfig,
-  ] = useState<PostProcessingConfig>({
-    smoothSegmentationMask: true,
-    jointBilateralFilter: { sigmaSpace: 1, sigmaColor: 0.1 },
-    coverage: [0.5, 0.75],
-    lightWrapping: 0.3,
-    blendMode: 'screen',
-  })
+  const [segmentationConfig, setSegmentationConfig] =
+    useState<SegmentationConfig>({
+      model: 'meet',
+      backend: 'wasm',
+      inputResolution: '160x96',
+      pipeline: 'webgl2',
+      targetFps: 65, // 60 introduces fps drop and unstable fps on Chrome
+      deferInputResizing: true,
+    })
+  const [postProcessingConfig, setPostProcessingConfig] =
+    useState<PostProcessingConfig>({
+      smoothSegmentationMask: true,
+      jointBilateralFilter: { sigmaSpace: 1, sigmaColor: 0.1 },
+      coverage: [0.5, 0.75],
+      lightWrapping: 0.3,
+      blendMode: 'screen',
+    })
   const bodyPix = useBodyPix()
   const { tflite, isSIMDSupported } = useTFLite(segmentationConfig)
 
