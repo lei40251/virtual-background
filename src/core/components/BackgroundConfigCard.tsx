@@ -23,22 +23,25 @@ function BackgroundConfigCard(props: BackgroundConfigCardProps) {
     <Card className={classes.root}>
       <CardContent>
         <Typography gutterBottom variant="h6" component="h2">
-          Background
+          背景选择
         </Typography>
-        <SelectionIconButton
+        {/* <SelectionIconButton
+          title='不处理'
           active={props.config.type === 'none'}
           onClick={() => props.onChange({ type: 'none' })}
         >
           <BlockIcon />
-        </SelectionIconButton>
+        </SelectionIconButton> */}
         <SelectionIconButton
+          title='虚化背景'
           active={props.config.type === 'blur'}
           onClick={() => props.onChange({ type: 'blur' })}
         >
           <BlurOnIcon />
         </SelectionIconButton>
-        {backgroundImageUrls.map((imageUrl) => (
+        {backgroundImageUrls.map((imageUrl,index) => (
           <ImageButton
+            title={'背景图 - '+(index+1)}
             key={imageUrl}
             imageUrl={imageUrl}
             active={imageUrl === props.config.url}
@@ -54,6 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
+      margin:'20px auto'
     },
   })
 )

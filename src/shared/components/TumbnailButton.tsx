@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import SelectionButton from './SelectionButton'
 
 type ThumbnailButtonProps = {
+  title?:string,
   thumbnailUrl?: string
   active: boolean
   children?: React.ReactNode
@@ -26,6 +27,7 @@ function ThumbnailButton(props: ThumbnailButtonProps) {
           src={props.thumbnailUrl}
           alt=""
           onLoad={props.onLoad}
+          title={props.title}
         />
       ) : (
         <Skeleton className={classes.scalableContent} variant="rect" />

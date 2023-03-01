@@ -2,6 +2,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import SelectionButton from './SelectionButton'
 
 type SelectionIconButtonProps = {
+  title?:string,
   active: boolean
   children: React.ReactNode
   onClick: () => void
@@ -12,7 +13,7 @@ function SelectionIconButton(props: SelectionIconButtonProps) {
 
   return (
     <SelectionButton active={props.active} onClick={props.onClick}>
-      <div className={classes.root}>{props.children}</div>
+      <div title={props.title} className={classes.root}>{props.children}</div>
     </SelectionButton>
   )
 }

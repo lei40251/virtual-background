@@ -45,7 +45,8 @@ function OutputViewer(props: OutputViewerProps) {
     `inference ${inferenceDuration}ms`,
     `post-processing ${postProcessingDuration}ms`,
   ]
-  const stats = `${Math.round(fps)} fps (${statDetails.join(', ')})`
+  const stats = `处理后视频`
+  // const stats = `处理后视频 ${Math.round(fps)} fps (${statDetails.join(', ')})`
 
   return (
     <div className={classes.root}>

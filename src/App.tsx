@@ -18,7 +18,7 @@ import useTFLite from './core/hooks/useTFLite'
 function App() {
   const classes = useStyles()
   const [sourceConfig, setSourceConfig] = useState<SourceConfig>({
-    type: 'image',
+    type: 'camera',
     url: sourceImageUrls[0],
   })
   const [backgroundConfig, setBackgroundConfig] = useState<BackgroundConfig>({
@@ -36,7 +36,7 @@ function App() {
   })
   const [
     postProcessingConfig,
-    setPostProcessingConfig,
+    // setPostProcessingConfig,
   ] = useState<PostProcessingConfig>({
     smoothSegmentationMask: true,
     jointBilateralFilter: { sigmaSpace: 1, sigmaColor: 0.1 },
@@ -67,21 +67,21 @@ function App() {
         bodyPix={bodyPix}
         tflite={tflite}
       />
-      <SourceConfigCard config={sourceConfig} onChange={setSourceConfig} />
+      {/* <SourceConfigCard config={sourceConfig} onChange={setSourceConfig} /> */}
       <BackgroundConfigCard
         config={backgroundConfig}
         onChange={setBackgroundConfig}
       />
-      <SegmentationConfigCard
+      {/* <SegmentationConfigCard
         config={segmentationConfig}
         isSIMDSupported={isSIMDSupported}
         onChange={setSegmentationConfig}
-      />
-      <PostProcessingConfigCard
+      /> */}
+      {/* <PostProcessingConfigCard
         config={postProcessingConfig}
         pipeline={segmentationConfig.pipeline}
         onChange={setPostProcessingConfig}
-      />
+      /> */}
     </div>
   )
 }
@@ -89,16 +89,18 @@ function App() {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'grid',
+      // display: 'grid',
+      width:'1280px',
+      margin:'20px auto',
 
       [theme.breakpoints.up('xs')]: {
-        margin: theme.spacing(1),
+        // margin: theme.spacing(1),
         gap: theme.spacing(1),
         gridTemplateColumns: '1fr',
       },
 
       [theme.breakpoints.up('md')]: {
-        margin: theme.spacing(2),
+        // margin: theme.spacing(2),
         gap: theme.spacing(2),
         gridTemplateColumns: 'repeat(2, 1fr)',
       },

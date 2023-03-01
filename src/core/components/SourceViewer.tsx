@@ -1,5 +1,6 @@
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 import VideocamOffIcon from '@material-ui/icons/VideocamOff'
 import React, { SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { SourceConfig, SourcePlayback } from '../helpers/sourceHelper'
@@ -30,7 +31,22 @@ function SourceViewer(props: SourceViewerProps) {
   useEffect(() => {
     async function getCameraStream() {
       try {
-        const constraint = { video: true }
+        const constraint = { 
+          video: {
+            "width": {
+                "ideal": 640
+            },
+            "height": {
+                "ideal": 480
+            },
+            "frameRate": {
+                "ideal": 15
+            },
+            "aspectRatio": { 
+              "ideal": 1.3333333333
+            }
+          } 
+        }
         const stream = await navigator.mediaDevices.getUserMedia(constraint)
         if (videoRef.current) {
           videoRef.current.srcObject = stream
@@ -97,6 +113,9 @@ function SourceViewer(props: SourceViewerProps) {
           onLoadedData={handleVideoLoad}
         />
       )}
+      <Typography className={classes.stats} variant="caption">
+        原视频
+      </Typography>
     </div>
   )
 }
@@ -126,6 +145,15 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       height: '100%',
       objectFit: 'cover',
+    },
+    stats: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      left: 0,
+      textAlign: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.48)',
+      color: theme.palette.common.white,
     },
   })
 )
