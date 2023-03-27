@@ -1,4 +1,4 @@
-export type SegmentationModel = 'bodyPix' | 'meet' | 'mlkit'
+export type SegmentationModel = 'meet' | 'mlkit'
 export type SegmentationBackend = 'webgl' | 'wasm' | 'wasmSimd'
 export type InputResolution = '640x360' | '256x256' | '256x144' | '160x96'
 

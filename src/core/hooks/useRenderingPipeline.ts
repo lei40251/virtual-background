@@ -1,4 +1,3 @@
-import { BodyPix } from '@tensorflow-models/body-pix'
 import { useEffect, useRef, useState } from 'react'
 import { buildCanvas2dPipeline } from '../../pipelines/canvas2d/canvas2dPipeline'
 import { buildWebGL2Pipeline } from '../../pipelines/webgl2/webgl2Pipeline'
@@ -13,7 +12,6 @@ function useRenderingPipeline(
   sourcePlayback: SourcePlayback,
   backgroundConfig: BackgroundConfig,
   segmentationConfig: SegmentationConfig,
-  bodyPix: BodyPix,
   tflite: TFLite
 ) {
   const [pipeline, setPipeline] = useState<RenderingPipeline | null>(null)
@@ -51,7 +49,6 @@ function useRenderingPipeline(
             backgroundConfig,
             segmentationConfig,
             canvasRef.current,
-            bodyPix,
             tflite,
             addFrameEvent
           )
@@ -116,7 +113,7 @@ function useRenderingPipeline(
 
       setPipeline(null)
     }
-  }, [sourcePlayback, backgroundConfig, segmentationConfig, bodyPix, tflite])
+  }, [sourcePlayback, backgroundConfig, segmentationConfig, tflite])
 
   return {
     pipeline,
